@@ -5,8 +5,8 @@
 #### Team Name: `Team Rocket`    
   
 #### Your team’s hackathon idea in TWO sentences:
-##### `YOUR TWO SENTENCES HERE`
-##### `YOUR TWO SENTENCES HERE`  
+##### `Utilizing rent, environmental, and local data, we will create a platform that tenants and landlords can use to determine the fairest rent.`
+##### `Additionally it will allow tenants to connect and collectively organize against unfair rents, and address any issues they have.`  
   
 #### Dataset(s) your team might use for the project (Provide name and URL):
 - ##### `San Diego Regional Library Database url:https://www.sandiegodata.org/`
