@@ -1,26 +1,26 @@
 ### 2019 BIG DATA HACKATHON PROPOSAL FORM
 
-#### Team Number: `YOUR TEAM NUMBER HERE`  
+#### Team Number: `207`  
 
-#### Team Name: `YOUR TEAM NAME HERE`    
+#### Team Name: `Team Rocket`    
   
 #### Your team’s hackathon idea in TWO sentences:
 ##### `YOUR TWO SENTENCES HERE`
 ##### `YOUR TWO SENTENCES HERE`  
   
 #### Dataset(s) your team might use for the project (Provide name and URL):
-- ##### `YOUR DATASETS HERE`
-- ##### `YOUR DATASETS  HERE`
+- ##### `San Diego Regional Library Database url:https://www.sandiegodata.org/`
+- ##### `Healthy Places Index url:https://map.healthyplacesindex.org/`
 
-#### Team Coordinator GitHub Username: `YOUR TEAM COORDINATOR GITHUB USERNAME HERE`
+#### Team Coordinator GitHub Username: `ksgraham15`
 
 #### Team Members
 | ## |        Name         | Active SDSU student? | Female active SDSU student? | Active SDSU veteran? | 14th grade (college 2nd year) or younger? |
 | -- | :------------------ |        :---:         |            :---:            |        :---:         |                  :---:                    |
-| 01 | Test Name           |         [X]          |             [ ]             |         [ ]          |                   [ ]                     |
-| 02 |                     |         [ ]          |             [ ]             |         [ ]          |                   [ ]                     |
-| 03 |                     |         [ ]          |             [ ]             |         [ ]          |                   [ ]                     |
-| 04 |                     |         [ ]          |             [ ]             |         [ ]          |                   [ ]                     |
+| 01 | Kaelynn Graham      |         [X]          |             [X]             |         [ ]          |                   [ ]                     |
+| 02 | Joseph Tinglof      |         [X]          |             [ ]             |         [ ]          |                   [ ]                     |
+| 03 |Michael Tinglof      |         [X]          |             [ ]             |         [ ]          |                   [ ]                     |
+| 04 |Gregory Martin       |         [X]          |             [ ]             |         [ ]          |                   [X]                     |
 | 05 |                     |         [ ]          |             [ ]             |         [ ]          |                   [ ]                     |
 | 06 |                     |         [ ]          |             [ ]             |         [ ]          |                   [ ]                     |
 | 07 |                     |         [ ]          |             [ ]             |         [ ]          |                   [ ]                     |
@@ -31,9 +31,9 @@
 #### A question your team is answering (check a box OR provide a question your team created)
 
 **Smart City**
-- [x] How can San Diegans have better options for parking in high-traffic areas to void congestion?
-- [x] How can we get an emergency vehicle to the scene in shortest possible time can save lives?
-- [ ] Your question:
+- [ ] How can San Diegans have better options for parking in high-traffic areas to void congestion?
+- [ ] How can we get an emergency vehicle to the scene in shortest possible time can save lives?
+- [x] Your question: How do you build a smart community that helps combat unfair renting practices?
 
 **Smart Environment**
 - [ ] How can San Diegans have access to better air quality indoors and outdoors?
