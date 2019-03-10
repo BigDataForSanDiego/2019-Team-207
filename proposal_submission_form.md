@@ -5,7 +5,7 @@
 #### Team Name: `Team Rocket`    
   
 #### Your team’s hackathon idea in TWO sentences:
-##### `Utilizing rent, environmental, and local data, we will create a platform that tenants and landlords can use to determine the fairest rent.`
+##### `Utilizing rent, environmental, and local data, we will create a platform that potential tenants and landlords can use to determine the fairest rent.`
 ##### `Additionally it will allow tenants to connect and collectively organize against unfair rents, and address any issues they have.`  
   
 #### Dataset(s) your team might use for the project (Provide name and URL):
@@ -33,7 +33,7 @@
 **Smart City**
 - [ ] How can San Diegans have better options for parking in high-traffic areas to void congestion?
 - [ ] How can we get an emergency vehicle to the scene in shortest possible time can save lives?
-- [x] Your question: How do you build a smart community that helps combat unfair renting practices?
+- [x] Your question: How can we effectively connect potential renters in making sure they are receiving a fair pricing for their unit?   
 
 **Smart Environment**
 - [ ] How can San Diegans have access to better air quality indoors and outdoors?
@@ -47,7 +47,7 @@
 
 **Smart Transportation**
 - [ ] How can San Diegans make better transportation decisions of getting from point A to Z that leaves a smaller carbon footprint?
-- [ ] Your question:
+- [ ] Your question: 
 
 **Smart Health**
 - [ ] How can we share useful public health information and web analytical tools for improve public health in San Diego?
