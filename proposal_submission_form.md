@@ -5,8 +5,8 @@
 #### Team Name: `Team Rocket`    
   
 #### Your team’s hackathon idea in TWO sentences:
-##### `Utilizing historic traffic data, and the placement of medical infrastructure, our team will create a platform that effectively routes emergency vehicles to and from an accident scene.`
-##### `The model will have dynamic parameters that include placement of nearby emergency vehicles, number of personnel in need of transport, and trauma center load capacity.`  
+##### `Utilizing rent, environmental, and local data, we will create a platform that potential tenants and landlords can use to determine the fairest rent.`
+##### `Additionally it will allow tenants to connect and collectively organize against unfair rents, and address any issues they have.`  
   
 #### Dataset(s) your team might use for the project (Provide name and URL):
 - ##### `San Diego Regional Library Database url:https://www.sandiegodata.org/`
@@ -33,7 +33,7 @@
 **Smart City**
 - [ ] How can San Diegans have better options for parking in high-traffic areas to void congestion?
 - [ ] How can we get an emergency vehicle to the scene in shortest possible time can save lives?
-- [x] Your question: How can we use traffic data in a simulated event to provide the most effectives routes for getting to a scene and transporting injured persons? 
+- [x] Your question: How can we effectively connect potential renters in making sure they are receiving a fair pricing for their unit?   
 
 **Smart Environment**
 - [ ] How can San Diegans have access to better air quality indoors and outdoors?
