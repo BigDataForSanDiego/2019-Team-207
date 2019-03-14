@@ -24,84 +24,100 @@ class craiglistscrape:
         chrome_options.add_argument('load-extension=' + path_to_extension)
         return(chrome_options)
 
-    def gethomeinfo(self):
+    def gethomeinfo(self, max_page):
         self.browser.create_options()
         self.browser.get(self.starting_url)
         df = pd.DataFrame(columns = ["price", "sqrtft", "bed", "bath", "type", "lng", "lat", "x", "y"])
         observation = 1
         estimate = 0 
-        for index in range(len(self.browser.find_elements_by_xpath("//li[@class='result-row']"))):
-            print("{} results".format(len(self.browser.find_elements_by_xpath("//li[@class='result-row']"))-estimate))
-            estimate = estimate + 1
-            price = self.browser.find_elements_by_xpath("//li[@class='result-row']")[index].text
-            price = price.splitlines()[0]
-            if(len(price) > 6):
+        current_page = 0 
+        while(current_page < max_page):
+            for index in range(len(self.browser.find_elements_by_xpath("//li[@class='result-row']"))):
+                print("{} results".format(len(self.browser.find_elements_by_xpath("//li[@class='result-row']"))-estimate))
+                estimate = estimate + 1
+                price = self.browser.find_elements_by_xpath("//li[@class='result-row']")[index].text
+                price = price.splitlines()[0]
+                if(len(price) > 6):
+                    try:
+                        start = price.index("$")
+                        end = price[start:].index(" ")
+                        price = float(price[start+1:start + end])
+                    except ValueError: 
+                        price = -1
+                else:
+                    price = float(price[1:]) 
                 try:
-                    start = price.index("$")
-                    end = price[start:].index(" ")
-                    price = float(price[start+1:start + end])
-                except ValueError: 
-                    price = -1
-            else:
-                price = float(price[1:]) 
-            try:
-                self.browser.find_elements_by_xpath("//a[@class='result-title hdrlnk']")[index].click()
-                map_att = self.browser.find_element_by_xpath("//div[@class='mapbox']")
-                lat = float(map_att.find_element_by_css_selector("div").get_attribute('data-latitude'))
-                lng = float(map_att.find_element_by_css_selector("div").get_attribute('data-longitude'))
-                attributes = self.browser.find_elements_by_xpath("//p[@class='attrgroup']")[0].text.lower().split()
-                bedrooms = -1
-                bathrooms = -1 
-                sqrft = -1 
-                for item in attributes:
-                    if 'br' in item: 
-                        bedrooms = float(item[:-2])
-                    elif "ba" in item: 
-                        bathrooms = float(item[:-2])
-                    elif "ft2" in item: 
-                        sqrft = float(item[:-3]) 
-                try:
-                    double_check = self.browser.find_elements_by_xpath("//p[@class='attrgroup']")[1].text.lower().split()
-                    for rent_type in double_check:
-                        if 'duplex' in rent_type: 
-                            rent_type = 'duplex'
-                            break
-                        elif 'condo' in rent_type:
-                            rent_type = 'condo'
-                            break
-                        elif 'townhouse' in rent_type: 
-                            rent_type = 'townhouse'
-                        elif 'house' in rent_type or 'home' in rent_type:
-                            rent_type = 'house'
-                            break
-                        elif 'apartment' in rent_type:
-                            rent_type = 'apartment'
-                            break
-                        else:
-                            rent_type = self.browser.find_element_by_xpath("//section[@id='postingbody']").text.lower()
+                    self.browser.find_elements_by_xpath("//a[@class='result-title hdrlnk']")[index].click()
+                    map_att = self.browser.find_element_by_xpath("//div[@class='mapbox']")
+                    lat = float(map_att.find_element_by_css_selector("div").get_attribute('data-latitude'))
+                    lng = float(map_att.find_element_by_css_selector("div").get_attribute('data-longitude'))
+                    attributes = self.browser.find_elements_by_xpath("//p[@class='attrgroup']")[0].text.lower().split()
+                    bedrooms = -1
+                    bathrooms = -1 
+                    sqrft = -1 
+                    for item in attributes:
+                        if 'br' in item: 
+                            bedrooms = float(item[:-2])
+                        elif "ba" in item: 
+                            bathrooms = float(item[:-2])
+                        elif "ft2" in item: 
+                            sqrft = float(item[:-3]) 
+                    try:
+                        double_check = self.browser.find_elements_by_xpath("//p[@class='attrgroup']")[1].text.lower().split()
+                        for rent_type in double_check:
                             if 'duplex' in rent_type: 
                                 rent_type = 'duplex'
+                                break
                             elif 'condo' in rent_type:
                                 rent_type = 'condo'
+                                break
                             elif 'townhouse' in rent_type: 
                                 rent_type = 'townhouse'
                             elif 'house' in rent_type or 'home' in rent_type:
                                 rent_type = 'house'
+                                break
                             elif 'apartment' in rent_type:
                                 rent_type = 'apartment'
+                                break
                             else:
-                                rent_type = -1 
-                except IndexError:
-                    rent_type = -1
-                if bedrooms > 0 and bathrooms > 0 and sqrft > 0 and price > 0: 
-                    df.loc[observation] = [price, sqrft, bedrooms, bathrooms, rent_type, lng, lat, round(lng+117.323330, 7), round(lat-32.531890, 7)]
-                    observation = observation + 1 
-            except NoSuchElementException:
-                pass
+                                rent_type = self.browser.find_element_by_xpath("//section[@id='postingbody']").text.lower()
+                                if 'duplex' in rent_type: 
+                                    rent_type = 'duplex'
+                                elif 'condo' in rent_type:
+                                    rent_type = 'condo'
+                                elif 'townhouse' in rent_type: 
+                                    rent_type = 'townhouse'
+                                elif 'house' in rent_type or 'home' in rent_type:
+                                    rent_type = 'house'
+                                elif 'apartment' in rent_type:
+                                    rent_type = 'apartment'
+                                else:
+                                    rent_type = -1 
+                    except IndexError:
+                        rent_type = -1
+                    if bedrooms > 0 and bathrooms > 0 and sqrft > 0 and price > 0: 
+                        df.loc[observation] = [price, sqrft, bedrooms, bathrooms, rent_type, lng, lat, round(lng+117.323330, 7), round(lat-32.531890, 7)]
+                        observation = observation + 1 
+                except NoSuchElementException:
+                    pass
+                finally: 
+                    self.browser.execute_script("window.history.go(-1)")
+            try: 
+                self.browser.find_element_by_link_text('next').click()
+            except NoSuchElementException: 
+                print("One more page? y/n")
+                cont = input() 
+                if(cont == "n"):
+                    current_page = max_page
+            except AttributeError: 
+                print("One more page? y/n")
+                cont = input() 
+                if(cont == "n"):
+                    current_page = max_page
             finally: 
-                self.browser.execute_script("window.history.go(-1)")
+                current_page = current_page + 1
         df.to_excel(self.writer)
         self.writer.save()
 
 test = craiglistscrape("https://sandiego.craigslist.org/d/apts-housing-for-rent/search/apa")
-test.gethomeinfo()
+test.gethomeinfo(5)
