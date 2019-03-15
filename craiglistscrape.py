@@ -89,29 +89,24 @@ class craiglistscrape:
                                 elif 'apartment' in rent_type:
                                     rent_type = 'apartment'
                                 else:
-                                    winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
-                                    print("Rent type?")
-                                    rent_type = input()
+                                   rent_type = 'n'
                     except IndexError:
-                        winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
-                        print("Rent type?")
-                        rent_type = input()
-                    if bedrooms > 0 and bathrooms > 0 and sqrft > 0 and price > 0: 
+                        rent_type = 'n'
+                    if bedrooms > 0 and bathrooms > 0 and sqrft > 0 and price > 0 and rent_type != 'n': 
                         df.loc[observation] = [price, sqrft, bedrooms, bathrooms, rent_type, lng, lat, round(lng+117.323330, 7), round(lat-32.531890, 7)]
                         observation = observation + 1 
                         print("{}".format(observation))
                 except NoSuchElementException:
+                    pass
+                except ValueError:
                     pass
                 finally: 
                     self.browser.execute_script("window.history.go(-1)")
             winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
             print("One more page? y/n")
             cont = input().lower()
-            while(cont != 'y' or cont != 'n'):
-                print("Please type 'y' to continue, or 'n' to end data collection")
-                cont = input().lower()
         df.to_excel(self.writer)
         self.writer.save()
 
 test = craiglistscrape("https://sandiego.craigslist.org/d/apts-housing-for-rent/search/apa")
-test.gethomeinfo(5)
+test.gethomeinfo()
