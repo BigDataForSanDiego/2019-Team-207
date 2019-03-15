@@ -24,17 +24,14 @@ class craiglistscrape:
         chrome_options.add_argument('load-extension=' + path_to_extension)
         return(chrome_options)
 
-    def gethomeinfo(self, max_page):
+    def gethomeinfo(self):
         self.browser.create_options()
         self.browser.get(self.starting_url)
         df = pd.DataFrame(columns = ["price", "sqrtft", "bed", "bath", "type", "lng", "lat", "x", "y"])
-        observation = 1
-        estimate = 0 
-        current_page = 0 
-        while(current_page < max_page):
+        cont = 'y'
+        observation = 0 
+        while(cont == 'y'):
             for index in range(len(self.browser.find_elements_by_xpath("//li[@class='result-row']"))):
-                print("{} results".format(len(self.browser.find_elements_by_xpath("//li[@class='result-row']"))-estimate))
-                estimate = estimate + 1
                 price = self.browser.find_elements_by_xpath("//li[@class='result-row']")[index].text
                 price = price.splitlines()[0]
                 if(len(price) > 6):
@@ -92,30 +89,27 @@ class craiglistscrape:
                                 elif 'apartment' in rent_type:
                                     rent_type = 'apartment'
                                 else:
-                                    rent_type = -1 
+                                    winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
+                                    print("Rent type?")
+                                    rent_type = input()
                     except IndexError:
-                        rent_type = -1
+                        winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
+                        print("Rent type?")
+                        rent_type = input()
                     if bedrooms > 0 and bathrooms > 0 and sqrft > 0 and price > 0: 
                         df.loc[observation] = [price, sqrft, bedrooms, bathrooms, rent_type, lng, lat, round(lng+117.323330, 7), round(lat-32.531890, 7)]
                         observation = observation + 1 
+                        print("{}".format(observation))
                 except NoSuchElementException:
                     pass
                 finally: 
                     self.browser.execute_script("window.history.go(-1)")
-            try: 
-                self.browser.find_element_by_link_text('next').click()
-            except NoSuchElementException: 
-                print("One more page? y/n")
-                cont = input() 
-                if(cont == "n"):
-                    current_page = max_page
-            except AttributeError: 
-                print("One more page? y/n")
-                cont = input() 
-                if(cont == "n"):
-                    current_page = max_page
-            finally: 
-                current_page = current_page + 1
+            winsound.PlaySound("SystemExclamation", winsound.SND_ALIAS)
+            print("One more page? y/n")
+            cont = input().lower()
+            while(cont != 'y' or cont != 'n'):
+                print("Please type 'y' to continue, or 'n' to end data collection")
+                cont = input().lower()
         df.to_excel(self.writer)
         self.writer.save()
 
