@@ -63,11 +63,14 @@ test_lables = test.pop('price')
 
 def build_model():
   model = keras.Sequential([
-    layers.Dense(1024, activation=tf.nn.relu, input_shape=[len(train.keys())]),
+    layers.Dense(512, activation=tf.nn.relu, input_shape=[len(train.keys())]),
     layers.Dense(512, activation=tf.nn.relu),
     layers.Dense(256, activation=tf.nn.relu),
     layers.Dense(256, activation=tf.nn.relu),
     layers.Dense(128, activation=tf.nn.relu),
+    layers.Dense(128, activation=tf.nn.relu),
+    layers.Dense(64, activation=tf.nn.relu),
+    layers.Dense(64, activation=tf.nn.relu),
     layers.Dense(1)
   ])
 
